@@ -28,7 +28,11 @@ class App extends React.Component {
   }
 
   removeItem = (i) => {
-    alert('remove')
+    const items = this.state.items.slice();
+    items.splice(i, 1)
+    this.setState({
+      items: items
+    })
   }
 
   onComplete = (i) => {
