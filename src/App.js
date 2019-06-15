@@ -16,12 +16,15 @@ class App extends React.Component {
     super();
     this.state = {
       input: '',
-      items: ['hello']
+      items: []
     }
   }
 
   addItem = () => {
-    alert('add')
+    this.setState({
+      input: '',
+      items: this.state.items.concat(this.state.input)
+    })
   }
 
   removeItem = (i) => {
@@ -30,6 +33,12 @@ class App extends React.Component {
 
   onComplete = (i) => {
     alert('complete')
+  }
+
+  updateInput = (event) => {
+    this.setState({
+      input: event.target.value,
+    })
   }
 
   render() {
