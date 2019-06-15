@@ -11,7 +11,24 @@ const Item = (props) => {
   )
 }
 
-class App extends React.Component {
+const List = (props) => {
+  return (
+    <ul>
+      {
+        props.items.map((item, i) => (
+          <Item 
+            key={i}
+            item={item}
+            onRemove={() => props.removeItem(i)}
+            onComplete={() => props.onComplete(i)}
+          />
+        ))
+      }
+    </ul>
+  )
+}
+
+class TodoList extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -56,19 +73,20 @@ class App extends React.Component {
       <div>
         <input type='text' name='Enter task here' onChange={this.updateInput}></input>
         <button onClick={this.addItem}>Add Item</button>
-        <ul>
-          {this.state.items.map((item, i) => (
-            <Item 
-              key={i}
-              item={item}
-              onRemove={() => this.removeItem(i)}
-              onComplete={() => this.onComplete(i)}
-            />
-          ))}
-        </ul>
+        <List 
+          items={this.state.items}
+          removeItem={this.removeItem}
+          onComplete={this.onComplete}
+        />
       </div>
     )
   }
+}
+
+const App = () => {
+  return (
+    <TodoList />
+  )
 }
 
 export default App;
