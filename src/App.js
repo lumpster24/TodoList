@@ -3,8 +3,8 @@ import './App.css';
 
 const Item = (props) => {
   return (
-    <li>
-      {props.item}
+    <li className={props.item.completed ? 'completed' : 'notCompleted'}>
+      {props.item.task}
       <button onClick={props.onRemove}>Remove Item</button>
       <button onClick={props.onComplete}>Toggle Complete</button>
     </li>
@@ -23,7 +23,9 @@ class App extends React.Component {
   addItem = () => {
     this.setState({
       input: '',
-      items: this.state.items.concat(this.state.input)
+      items: this.state.items.concat(
+        {task: this.state.input, completed: false}
+      )
     })
   }
 
@@ -36,7 +38,11 @@ class App extends React.Component {
   }
 
   onComplete = (i) => {
-    alert('complete')
+    const items = this.state.items.slice();
+    items[i].completed = !items[i].completed;
+    this.setState({
+      items: items
+    })
   }
 
   updateInput = (event) => {
