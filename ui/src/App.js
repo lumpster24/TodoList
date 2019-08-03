@@ -71,7 +71,7 @@ class TodoList extends React.Component {
   render() {
     return(
       <div>
-        <input type='text' name='Enter task here' onChange={this.updateInput}></input>
+        <input value={this.state.input} type='text' name='Enter task here' onChange={this.updateInput}></input>
         <button onClick={this.addItem}>Add Item</button>
         <List 
           items={this.state.items}
